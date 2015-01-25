@@ -1,4 +1,4 @@
-swisswatch.js
+ticktack.js
 =============
 
 requestanimationframe based watch.
