@@ -7,7 +7,7 @@
       define(['requestAnimationFrame'], factory);
   } else {
       // Browser globals
-      root.ticktack = factory(root.$);
+      root.ticktack = factory();
   }
 }(this, function () {
 
