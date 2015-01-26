@@ -1,0 +1,34 @@
+{
+  "name": "ticktack.js",
+  "main": "ticktack.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/meodai/ticktack.js",
+  "authors": [
+    "David Aerne",
+    "Pierre Spring",
+    "David Darx"
+  ],
+  "description": "requestanimationframe based watch function",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "raf",
+    "requestanimationframe",
+    "date",
+    "time",
+    "watch",
+    "animation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requestAnimationFrame": "~0.0.22"
+  }
+}
