@@ -46,7 +46,7 @@ event type: hour, minute, second, millisecond or tick
 
 - *digits* object containng all digit objects.
 ```javascriot
-{
+  {
     'day': {
       method: 'getDay',
       value: 0,
@@ -71,6 +71,7 @@ event type: hour, minute, second, millisecond or tick
       method: 'getMilliseconds',
       value: 0
     }
+  }
 ```
 
 ### Contributors
