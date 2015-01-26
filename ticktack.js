@@ -58,7 +58,7 @@
           value: 0,
           progress: 0,
           getProgress: function(value) {
-            return value / 30;
+            return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
           }
         },
         'day': {
