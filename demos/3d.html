@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>3D Demo</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      body {
+        position: relative;
+        height: 100%;
+        color: #aaa;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="../bower_components/requestAnimationFrame/app/requestAnimationFrame.js"></script>
+    <script src="../ticktack.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <script>
+      "use strict";
+      var container, camera, scene, renderer;
+      var geom_seconds, geom_minutes, geom_hours, deco, deco_items, last_minute_progress;
+
+      init();
+
+      function setThetaLength(target, thetaLength) {
+        target.parameters.thetaLength = thetaLength;
+
+        var innerRadius     = target.parameters.innerRadius,
+            outerRadius     = target.parameters.outerRadius,
+            thetaSegments   = target.parameters.thetaSegments,
+            phiSegments     = target.parameters.phiSegments,
+            thetaLength     = target.parameters.thetaLength,
+            thetaStart      = target.parameters.thetaStart;
+
+        var radius = innerRadius;
+        var radiusStep = ( ( outerRadius - innerRadius ) / phiSegments );
+
+        for ( var i = 0; i < phiSegments + 1; i ++ ) { // concentric circles inside ring
+          for ( var o = 0; o < thetaSegments + 1; o ++ ) { // number of segments per circle
+            var vertex = target.vertices[(i* (thetaSegments + 1)) + o];
+            var segment = thetaStart + o / thetaSegments * thetaLength;
+            vertex.x = radius * Math.cos( segment );
+            vertex.y = radius * Math.sin( segment );
+          }
+          radius += radiusStep;
+        }
+        target.verticesNeedUpdate = true;
+      }
+
+      function init() {
+        last_minute_progress = 0;
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.y = 50;
+        camera.position.z = 700;
+
+        scene = new THREE.Scene();
+
+        var object;
+
+        scene.add( new THREE.AmbientLight( 0x404040 ) );
+
+        var lights = [];
+        lights[0] = new THREE.PointLight( 0xffffff, 0.7, 0 );
+        lights[1] = new THREE.PointLight( 0xffffff, 0.2, 0 );
+
+        lights[0].position.set( 0, 300, -500 );
+        lights[1].position.set( -200, -200, -300 );
+
+        scene.add( lights[0] );
+        scene.add( lights[1] );
+
+        var material_seconds = new THREE.MeshPhongMaterial({
+          color: 0xBEDB39,
+          shininess: 10,
+          specular: 0x333333,
+          side: THREE.DoubleSide
+        });
+
+        var material_minutes = new THREE.MeshPhongMaterial({
+          color: 0xFFE11A,
+          shininess: 10,
+          specular: 0x333333,
+          side: THREE.DoubleSide
+        });
+
+        var material_hours = new THREE.MeshPhongMaterial({
+          color: 0xFD7400,
+          shininess: 10,
+          specular: 0x333333,
+          side: THREE.DoubleSide
+        });
+
+        var material_deco = new THREE.MeshPhongMaterial({
+          color: 0xaD7200,
+          shininess: 10,
+          specular: 0x333333,
+          side: THREE.DoubleSide
+        });
+
+        geom_seconds = new THREE.RingGeometry(20, 40, 40, 5, 0, Math.PI * 2);
+        geom_minutes = new THREE.RingGeometry(85, 100, 40, 5, 0, Math.PI * 2);
+        geom_hours = new THREE.RingGeometry(110, 115, 40, 5, 0, Math.PI * 2);
+
+        object = new THREE.Mesh( geom_seconds, material_seconds );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        scene.add( object );
+
+        object = new THREE.Mesh( geom_minutes, material_minutes );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        object.position.set(0,0, -100);
+        scene.add( object );
+
+        object = new THREE.Mesh( geom_hours, material_hours );
+        object.rotation.set(0, 0, Math.PI * 0.5);
+        object.position.set(0,0, 50);
+        scene.add( object );
+
+        // Add small elements.
+        deco_items = [];
+        for (var i = 0; i < 20; i++) {
+          var inner_radius = Math.random() * 120 + 130;
+          var width = Math.random() * 20 + 1;
+          var theta = Math.PI * Math.random() + 0.05;
+          var geom = new THREE.RingGeometry(inner_radius, inner_radius + width, 40, 5, 0, theta);
+          var item = new THREE.Mesh(geom, material_deco);
+          item.userData.rotation = Math.PI * 2 * Math.random();
+          item.userData.weight = Math.random() * 0.1 + 0.05;
+          item.rotation.set(0, 0, item.userData.rotation);
+          item.position.set(0,0, 50 + Math.random() * 300);
+          scene.add( item );
+          deco_items.push(item);
+        }
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setClearColor( 0x2E2625, 1);
+
+        container.appendChild( renderer.domElement );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+
+      ticktack.on('tick', function(o){
+        setThetaLength(geom_seconds, o.minute.progress * Math.PI * 2 * -1);
+        setThetaLength(geom_minutes, o.hour.progress * Math.PI * 2 * -1);
+
+        // display 2 * 12h, day.progress is calculted on 24h.
+        var day_progress = (o.day.progress * 2) % 1;
+        setThetaLength(geom_hours, day_progress * Math.PI * 2 * -1);
+
+
+        // Move deco items to their target rotation.
+        for (var i = deco_items.length - 1; i >= 0; i--) {
+          var item = deco_items[i];
+          // Change deco position when starting a new minute.
+          if (o.minute.progress < last_minute_progress) {
+            // Move target rotation.
+            item.userData.rotation += Math.random() * 2 - 1;
+          }
+
+          var rotation = item.rotation.z + (item.userData.rotation - item.rotation.z) * item.userData.weight;
+          item.rotation.set(0, 0, rotation);
+        }
+
+        last_minute_progress = o.minute.progress;
+        render();
+      });
+
+      function render() {
+        var timer = Date.now() * 0.0001;
+
+        camera.position.x = Math.cos( timer ) * 50;
+        camera.lookAt( scene.position );
+
+        renderer.render( scene, camera );
+      }
+    </script>
+  </body>
+</html>
