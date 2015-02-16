@@ -3,6 +3,11 @@ ticktack.js
 
 requestanimationframe based watch.
 
+## Demos
+
+- [3D Three.js] (http://codepen.io/idflood/pen/XJZyOg?editors=001)
+- [color based] (http://codepen.io/meodai/pen/yyNWKz?editors=001)
+
 ## Installation
 
 ```
