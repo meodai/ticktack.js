@@ -3,6 +3,12 @@ ticktack.js
 
 requestanimationframe based watch.
 
+## Demos
+
+- [3D Three.js] (http://codepen.io/idflood/pen/XJZyOg?editors=001)
+- [color based] (http://codepen.io/meodai/pen/yyNWKz?editors=001)
+- [hipster] (http://codepen.io/meodai/pen/azqPbq?editors=001)
+
 ## Installation
 
 ```
@@ -77,5 +83,7 @@ event type: hour, minute, second, millisecond or tick
 ### Contributors
 - [David Aerne](https://github.com/meodai/)
 - [David Darx](http://www.daviddarx.com/)
+- [David Mignot] (https://github.com/idflood)
 - [Pierre Spring](https://github.com/caillou)
+
 
