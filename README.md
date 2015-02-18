@@ -5,7 +5,7 @@ requestanimationframe based watch.
 
 ## Demos
 
-- [3D Three.js] (http://codepen.io/idflood/pen/XJZyOg?editors=001)
+- [3D Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001)
 - [color based] (http://codepen.io/meodai/pen/yyNWKz?editors=001)
 - [hipster] (http://codepen.io/meodai/pen/azqPbq?editors=001)
 
