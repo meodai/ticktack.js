@@ -126,9 +126,9 @@
           side: THREE.DoubleSide
         });
 
-        geom_seconds = new THREE.RingGeometry(20, 40, 40, 1, 0, Math.PI * 2);
+        geom_hours = new THREE.RingGeometry(20, 40, 40, 1, 0, Math.PI * 2);
         geom_minutes = new THREE.RingGeometry(85, 100, 40, 1, 0, Math.PI * 2);
-        geom_hours = new THREE.RingGeometry(110, 115, 40, 1, 0, Math.PI * 2);
+        geom_seconds = new THREE.RingGeometry(110, 115, 60, 1, 0, Math.PI * 2);
 
         object = new THREE.Mesh( geom_seconds, material_seconds );
         object.rotation.set(0, 0, Math.PI * 0.5);
