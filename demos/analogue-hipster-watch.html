@@ -38,10 +38,9 @@
             .watch--minute {
 
             }
-            .watch--minute:after,
-            .watch--second:after,
-            .watch--hour:after{
-                content: "";
+            .watch--minute span,
+            .watch--second span,
+            .watch--hour span {
                 position: absolute;
                 top: -1000%;
                 bottom: 40%;
@@ -60,9 +59,9 @@
 
         <p class="console"></p>
         <div class="watch">
-            <div class="watch--second"></div>
-            <div class="watch--minute"></div>
-            <div class="watch--hour"></div>
+            <div class="watch--second"><span></span></div>
+            <div class="watch--minute"><span></span></div>
+            <div class="watch--hour"><span></span></div>
         </div>
 
         <script src="../bower_components/requestAnimationFrame/app/requestAnimationFrame.js"></script>
@@ -72,14 +71,14 @@
             var $s = $('.watch--second');
             var $m = $('.watch--minute');
             var $h = $('.watch--hour');
-            var $all = $('.watch--hour, .watch--minute, .watch--second');
+            var $all = $('.watch--hour span, .watch--minute span, .watch--second span');
 
             ticktack.on('tick', function(o,e){
                 $("body").css("background-image", "-webkit-linear-gradient(hsl(" + (o.minute.progress * 360) + ",100%," + (100 - (o.hour.progress * 80)) + "%),hsl(" + ((o.minute.progress * 360) - 180) + ",100%," + (100 - (o.hour.progress * 80)) + "%))" );
                 $h.css('transform', 'translate(-50%, -100%) rotate(' + ((o.hour.value - 12) / 12  * 360) + 'deg)');
                 $m.css('transform', 'translate(-50%, -100%) rotate(' + (o.hour.progress * 360) + 'deg)');
                 $s.css('transform', 'translate(-50%, -100%) rotate(' + (o.minute.progress * 360) + 'deg) rotateX(' + (o.minute.progress * 360) + 'deg)' );
-                $all.css('color', "hsl(" + (o.minute.progress * 360) + ",100%, 50%)");
+                $all.css('background-color', "hsl(" + (o.minute.progress * 360) + ",100%, 50%)");
                 $('.watch').css("background-image", "-webkit-linear-gradient(hsl(" + ((o.minute.progress * 360) - 180) + ",100%," + (100 - (o.hour.progress * 80)) + "%),hsl(" + ((o.minute.progress * 360)) + ",100%," + (100 - (o.hour.progress * 80)) + "%))" );
             });
 
