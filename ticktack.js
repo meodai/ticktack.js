@@ -9,8 +9,8 @@
       // Browser globals
       root.ticktack = factory();
   }
-}(this, function () {
-  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject;
+}(this, function (undefined) {
+  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback;
 
   // Initializing callback objects
   callbacks = {};
@@ -21,16 +21,26 @@
    * @param   {Object} obj object produced by getTimeObject, will be passed to the callback
    * @returns {void}
    */
-  runCallbacks = function(obj) {
+  runCallbacks = function() {
     var i, j, name;
     for (i in registeredCallbacks) {
       name = registeredCallbacks[i];
-      if ((obj[name] && obj[name].hasChanged ) || name === 'tick') {
+      if ((timeObject[name] && timeObject[name].hasChanged ) || name === 'tick') {
         for (j in callbacks[name]) {
-          callbacks[name][j].call(obj[name], obj, obj[name]);
+          runCallback(callbacks[name][j], name);
         }
       }
     }
+  };
+
+  /**
+   * runCallback: execute callback with the correct timeobject arguments
+   * @param   {Function} callback   callback function
+   * @param   {[type]}   eventName  name of the event
+   * @returns {void}
+   */
+  runCallback = function (callback, eventName) {
+    callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
   };
 
   /**
@@ -127,7 +137,7 @@
     // get new data structure
     timeObject = getTimeObject(timeObject);
     // runs callbacks
-    runCallbacks(timeObject);
+    runCallbacks();
   };
 
   window.requestAnimationFrame(tick);
@@ -150,7 +160,7 @@
 
       tick();
 
-      callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
+      runCallback(callback, eventName);
     }
   };
 }));
