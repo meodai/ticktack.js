@@ -46,6 +46,12 @@
   };
 
   PROGRESS_FUNCTIONS = {
+    year: function yearProgress(value, now) {
+      var daysInYear, jan1;
+      daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
+      jan1 = new Date(now.getFullYear(), 0, 1);
+      return Math.ceil((now - jan1) / 86400000) / daysInYear;
+    },
     month: function monthProgress(value, now) {
       return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
     },
