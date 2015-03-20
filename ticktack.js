@@ -107,6 +107,10 @@
     };
 
     for (digit in digits) {
+      if ( !digits.hasOwnProperty(digit) ) {
+        continue;
+      }
+
       d = digits[digit];
       // sets the value using the appropriate Date method
       d.value = now[d.method]();
