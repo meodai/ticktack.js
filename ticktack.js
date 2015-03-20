@@ -158,9 +158,10 @@
 
       callbacks[eventName].push(callback);
 
-      tick();
-
-      runCallback(callback, eventName);
+      window.requestAnimationFrame(function() {
+        // Makes sure an hour event is called instantly, in just in 54 minutes
+        runCallback(callback, eventName);
+      });
     }
   };
 }));
