@@ -36,12 +36,28 @@
   /**
    * runCallback: execute callback with the correct timeobject arguments
    * @param   {Function} callback   callback function
-   * @param   {[type]}   eventName  name of the event
+   * @param   {string}   eventName  name of the event
    * @returns {void}
    */
   runCallback = function (callback, eventName) {
     callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
   };
+
+  var PROGRESS_FUNCTIONS = {
+    month: function monthProgressFunction(value, now) {
+      return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
+    },
+
+  }
+
+  var DIGITS_METHODS = {
+    'year': 'getFullYear'
+  }
+
+  var DIGITS = Object.keys(DIGITS_METHODS);
+
+    'month'
+  ]
 
   /**
    * getTimeObject : produces an object containing all values and relative values for every digit in Date()
@@ -63,7 +79,7 @@
       'month': {
         method: 'getMonth',
         value: 0,
-        progress: 0,
+        progress: PROGRESS_FUNCTION[month],
         getProgress: function(value) {
           return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
         }
@@ -127,7 +143,6 @@
     return digits;
   };
 
-
   setTimeObject = function() {
     // get new data structure
     timeObject = getTimeObject(timeObject);
@@ -139,9 +154,7 @@
    */
   tick = function () {
     window.requestAnimationFrame(tick);
-
     setTimeObject();
-    // runs callbacks
     runCallbacks();
   };
 
