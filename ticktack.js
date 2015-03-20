@@ -9,7 +9,7 @@
       // Browser globals
       root.ticktack = factory();
   }
-}(this, function (undefined) {
+}(this, function () {
   var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback;
 
   // Initializing callback objects
@@ -151,7 +151,7 @@
      * @returns {void}
      */
     on: function (eventName, callback) {
-      if (callbacks[eventName] === undefined) {
+      if (typeof callbacks[eventName] === 'undefined') {
         registeredCallbacks.push(eventName);
         callbacks[eventName] = [];
       }
