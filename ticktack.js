@@ -10,7 +10,9 @@
       root.ticktack = factory();
   }
 }(this, function () {
-  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback, initLoop, setTimeObject;
+  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback, initLoop, setTimeObject,
+  // constants
+      PROGRESS_FUNCTIONS, DIGITS_METHODS, DIGITS;
 
   // Initializing callback objects
   callbacks = {};
@@ -43,21 +45,35 @@
     callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
   };
 
-  var PROGRESS_FUNCTIONS = {
-    month: function monthProgressFunction(value, now) {
+  PROGRESS_FUNCTIONS = {
+    month: function monthProgress(value, now) {
       return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
     },
+    day: function dayProgress(value, now) {
+      return now.getHours() / 24;
+    },
+    hour: function hourProgress(value, now, timeInMilliseconds) {
+      return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
+    },
+    minute: function minuteProgress(value, now, timeInMilliseconds) {
+      return (timeInMilliseconds / 1000 / 60) % 60 - value;
+    },
+    second: function secondProgress(value, now, timeInMilliseconds) {
+      return (timeInMilliseconds / 1000) % 60 - value;
+    }
+  };
 
-  }
+  DIGITS_METHODS = {
+    year: 'getFullYear',
+    month: 'getMonth',
+    day: 'getDay',
+    hour: 'getHours',
+    minute: 'getMinutes',
+    second: 'getSeconds',
+    millisecond: 'getMilliseconds'
+  };
 
-  var DIGITS_METHODS = {
-    'year': 'getFullYear'
-  }
-
-  var DIGITS = Object.keys(DIGITS_METHODS);
-
-    'month'
-  ]
+  DIGITS = Object.keys(DIGITS_METHODS);
 
   /**
    * getTimeObject : produces an object containing all values and relative values for every digit in Date()
@@ -65,74 +81,28 @@
    * @returns {Object}                value and progress for every digit in Date()
    */
   getTimeObject = function (previousDigits) {
-    var now, timeInMilliseconds, digit, digits, d;
+    var now, timeInMilliseconds, digit, digits, d, i;
 
     now = new Date();
     timeInMilliseconds = now.getTime() - now.getTimezoneOffset() * 60000;
 
-    digits = {
-      'year': {
-        method: 'getFullYear',
-        value: 0,
-        progress: 0
-      },
-      'month': {
-        method: 'getMonth',
-        value: 0,
-        progress: PROGRESS_FUNCTION[month],
-        getProgress: function(value) {
-          return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
-        }
-      },
-      'day': {
-        method: 'getDay',
-        value: 0,
-        progress: 0,
-        getProgress: function() {
-          return now.getHours() / 24;
-        }
-      },
-      'hour': {
-        method: 'getHours',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
-        }
-      },
-      'minute': {
-        method: 'getMinutes',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000 / 60) % 60 - value;
-        }
-      },
-      'second': {
-        method: 'getSeconds',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000) % 60 - value;
-        }
-      },
-      'millisecond': {
-        method: 'getMilliseconds',
-        value: 0
-      }
-    };
+    digits = {};
 
-    for (digit in digits) {
-      if ( !digits.hasOwnProperty(digit) ) {
+    for (i in DIGITS) {
+      if ( !DIGITS.hasOwnProperty(i) ) {
         continue;
       }
 
-      d = digits[digit];
+      digit = DIGITS[i];
+
+      d = digits[digit] = {};
+
       // sets the value using the appropriate Date method
-      d.value = now[d.method]();
-      if (d.getProgress) {
+      d.value = now[DIGITS_METHODS[digit]]();
+
+      if (PROGRESS_FUNCTIONS[digit]) {
         // calculates the relative progress
-        d.progress = d.getProgress(d.value);
+        d.progress = PROGRESS_FUNCTIONS[digit](d.value, now, timeInMilliseconds);
       }
       // compares with previous digits object to track changes
       if (previousDigits && previousDigits[digit]) {
