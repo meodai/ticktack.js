@@ -10,7 +10,7 @@
       root.ticktack = factory();
   }
 }(this, function () {
-  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback;
+  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback, initLoop;
 
   // Initializing callback objects
   callbacks = {};
@@ -130,17 +130,21 @@
   tick = function () {
     window.requestAnimationFrame(tick);
 
-    if (registeredCallbacks.length === 0) {
-      return;
-    }
-
     // get new data structure
     timeObject = getTimeObject(timeObject);
     // runs callbacks
     runCallbacks();
   };
 
-  window.requestAnimationFrame(tick);
+  /**
+   * initLoop: initialize the RAF Loop
+   * @returns {void}
+   */
+  initLoop = function () {
+    window.requestAnimationFrame(tick);
+    // makes sure initLoop is called only once
+    initLoop = function () {};
+  };
 
   // public methods
   return {
@@ -162,6 +166,8 @@
         // Makes sure an hour event is called instantly, in just in 54 minutes
         runCallback(callback, eventName);
       });
+
+      initLoop();
     }
   };
 }));
