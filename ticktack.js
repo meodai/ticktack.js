@@ -58,7 +58,13 @@
       'year': {
         method: 'getFullYear',
         value: 0,
-        progress: 0
+        progress: 0,
+        getProgress: function() {
+            var daysInYear, jan1;
+            daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
+            jan1 = new Date(now.getFullYear(), 0, 1);
+            return Math.ceil((now - jan1) / 86400000) / daysInYear;
+        }
       },
       'month': {
         method: 'getMonth',
