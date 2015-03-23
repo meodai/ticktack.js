@@ -20,8 +20,8 @@ requestanimationframe based watch.
 ```javascript
   ticktack.on('second', function(digit,digits){
     console.log(digit,digits);
-    // e contains all the values relative to seconds
-    // o contains values for all digits
+    // digit and 'this' contain all the values relative to seconds
+    // digits contains values for all digits
   });
 
   ticktack.on('tick', function(e,o){
