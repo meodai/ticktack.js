@@ -5,9 +5,11 @@ requestanimationframe based watch.
 
 ## Demos
 
-- [3D Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001)
-- [color based] (http://codepen.io/meodai/pen/yyNWKz?editors=001)
-- [hipster] (http://codepen.io/meodai/pen/azqPbq?editors=001)
+- [3D Progress with Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
+- [husl color gradient] (http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
+- [hipster demo] (http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
+- [randomized Lines] (http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
+- [flat abstract 3d planets] (http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
 
 ## Installation
 
@@ -18,13 +20,13 @@ requestanimationframe based watch.
 ### Usage
 
 ```javascript
-  ticktack.on('second', function(digit,digits){
-    console.log(digit,digits);
-    // e contains all the values relative to seconds
-    // o contains values for all digits
+  ticktack.on('second', function(digits,digit){
+    console.log(digits,digit);
+    // digits contains values for all digits
+    // digit and 'this' contains all the values relative to to the 'on' event (seconds)
   });
 
-  ticktack.on('tick', function(e,o){
+  ticktack.on('tick', function(digits,digit){
     // will be called on requestAnimationFrame
   });
 
@@ -37,7 +39,7 @@ requestanimationframe based watch.
 event type: hour, minute, second, millisecond or tick
 
 **handler**
-*Type*: Function( PlainObject digit, PlainObject digits )
+*Type*: Function( PlainObject digits, PlainObject digit )
 - *digit*: contains an object with values relative to the event typically
 ```javascript
 {
