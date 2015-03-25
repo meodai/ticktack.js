@@ -10,7 +10,7 @@ requestanimationframe based watch.
 - [hipster demo] (http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
 - [randomized Lines] (http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
 - [flat abstract 3d planets] (http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
-- [swiss train station aka ios] (http://codepen.io/meodai/pen/JoxyaV?editors=001) by @cssanimation adapted by @meodai
+- [swiss train station aka ios] (http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
 
 ## Installation
 
