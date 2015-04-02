@@ -45,41 +45,59 @@
     callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
   };
 
-  PROGRESS_FUNCTIONS = {
-    year: function yearProgress(value, now) {
-      var daysInYear, jan1;
-      daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
-      jan1 = new Date(now.getFullYear(), 0, 1);
-      return Math.ceil((now - jan1) / 86400000) / daysInYear;
-    },
-    month: function monthProgress(value, now) {
-      return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
-    },
-    day: function dayProgress(value, now) {
-      return now.getHours() / 24;
-    },
-    hour: function hourProgress(value, now, timeInMilliseconds) {
-      return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
-    },
-    minute: function minuteProgress(value, now, timeInMilliseconds) {
-      return (timeInMilliseconds / 1000 / 60) % 60 - value;
-    },
-    second: function secondProgress(value, now, timeInMilliseconds) {
-      return (timeInMilliseconds / 1000) % 60 - value;
+  PROGRESS_FUNCTIONS = [
+    {
+      property: 'year',
+      getterFunction: function yearProgress(value, now) {
+        var daysInYear, jan1;
+        daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
+        jan1 = new Date(now.getFullYear(), 0, 1);
+        return Math.ceil((now - jan1) / 86400000) / daysInYear;
+      },
+      dateMethod: 'getFullYear'
+    }, {
+      property: 'month',
+      getterFunction: function monthProgress(value, now) {
+        return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
+      },
+      dateMethod: 'getMonth'
+    }, {
+      property: 'day',
+      getterFunction: function dayProgress(value, now) {
+        return now.getHours() / 24;
+      },
+      dateMethod: 'getDay'
+    }, {
+      property: 'hour',
+      getterFunction: function hourProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
+      },
+      dateMethod: 'getHours'
+    }, {
+      property: 'minute',
+      getterFunction: function minuteProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000 / 60) % 60 - value;
+      },
+      dateMethod: 'getMinutes'
+    }, {
+      property: 'second',
+      getterFunction: function secondProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000) % 60 - value;
+      },
+      dateMethod: 'getSeconds'
+    }, {
+      property: 'millisecond',
+      dateMethod: 'getMilliseconds',
+      getterFunction: function () {
+        return 0;
+      }
     }
-  };
+  ];
 
-  DIGITS_METHODS = {
-    year: 'getFullYear',
-    month: 'getMonth',
-    day: 'getDay',
-    hour: 'getHours',
-    minute: 'getMinutes',
-    second: 'getSeconds',
-    millisecond: 'getMilliseconds'
-  };
 
-  DIGITS = Object.keys(DIGITS_METHODS);
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
   /**
    * getTimeObject : produces an object containing all values and relative values for every digit in Date()
@@ -87,36 +105,49 @@
    * @returns {Object}                value and progress for every digit in Date()
    */
   getTimeObject = function (previousDigits) {
-    var now, timeInMilliseconds, digit, digits, d, i;
+    var now, timeInMilliseconds;
 
     now = new Date();
     timeInMilliseconds = now.getTime() - now.getTimezoneOffset() * 60000;
 
-    digits = {};
+    return (function () {
+      var digits, cache;
 
-    for (i in DIGITS) {
-      if ( !DIGITS.hasOwnProperty(i) ) {
-        continue;
-      }
+      cache = {};
+      digits = {}
 
-      digit = DIGITS[i];
+      PROGRESS_FUNCTIONS.forEach(function (propertyDefinition) {
+        var property, functionName, value;
+        property = propertyDefinition.property;
+        functionName = 'get' + capitalizeFirstLetter(property);
 
-      d = digits[digit] = {};
+        digits[functionName] = function () {
+          if (cache[property]) {
+            return cache[property]
+          }
 
-      // sets the value using the appropriate Date method
-      d.value = now[DIGITS_METHODS[digit]]();
+          value = now[propertyDefinition.dateMethod]();
 
-      if (PROGRESS_FUNCTIONS[digit]) {
-        // calculates the relative progress
-        d.progress = PROGRESS_FUNCTIONS[digit](d.value, now, timeInMilliseconds);
-      }
-      // compares with previous digits object to track changes
-      if (previousDigits && previousDigits[digit]) {
-        d.hasChanged = d.value !== previousDigits[digit].value;
-      }
-    }
+          return cache[property] = {
+            value: value,
+            progress: propertyDefinition.getterFunction(
+              value,
+              now,
+              timeInMilliseconds
+            )
+          }
+        };
 
-    return digits;
+        Object.defineProperty(digits, property, {
+            get: function () {
+              // console.log('calling `digit.' + property + '` is depricated, use `digit.' + functionName + '()` instead.');
+              return this[functionName]();
+            }
+        });
+      })
+      return digits;
+    })();
+
   };
 
   setTimeObject = function() {
