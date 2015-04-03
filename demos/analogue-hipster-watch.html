@@ -74,19 +74,22 @@
             var $all = $('.watch--hour span, .watch--minute span, .watch--second span');
 
             ticktack.on('tick', function(o,e){
-                $("body").css("background-image", "-webkit-linear-gradient(hsl(" + (o.minute.progress * 360) + ",100%," + (100 - (o.hour.progress * 80)) + "%),hsl(" + ((o.minute.progress * 360) - 180) + ",100%," + (100 - (o.hour.progress * 80)) + "%))" );
-                $h.css('transform', 'translate(-50%, -100%) rotate(' + ((o.hour.value - 12) / 12  * 360) + 'deg)');
-                $m.css('transform', 'translate(-50%, -100%) rotate(' + (o.hour.progress * 360) + 'deg)');
-                $s.css('transform', 'translate(-50%, -100%) rotate(' + (o.minute.progress * 360) + 'deg) rotateX(' + (o.minute.progress * 360) + 'deg)' );
-                $all.css('background-color', "hsl(" + (o.minute.progress * 360) + ",100%, 50%)");
-                $('.watch').css("background-image", "-webkit-linear-gradient(hsl(" + ((o.minute.progress * 360) - 180) + ",100%," + (100 - (o.hour.progress * 80)) + "%),hsl(" + ((o.minute.progress * 360)) + ",100%," + (100 - (o.hour.progress * 80)) + "%))" );
+                $("body").css("background-image", "-moz-linear-gradient(hsl(" + (o.getMinute().progress * 360) + ",100%," + (100 - (o.getHour().progress * 80)) + "%),hsl(" + ((o.getMinute().progress * 360) - 180) + ",100%," + (100 - (o.getHour().progress * 80)) + "%))" );
+                $("body").css("background-image", "-webkit-linear-gradient(hsl(" + (o.getMinute().progress * 360) + ",100%," + (100 - (o.getHour().progress * 80)) + "%),hsl(" + ((o.getMinute().progress * 360) - 180) + ",100%," + (100 - (o.getHour().progress * 80)) + "%))" );
+                $h.css('transform', 'translate(-50%, -100%) rotate(' + ((o.getHour().value - 12) / 12  * 360) + 'deg)');
+                $m.css('transform', 'translate(-50%, -100%) rotate(' + (o.getHour().progress * 360) + 'deg)');
+                $s.css('transform', 'translate(-50%, -100%) rotate(' + (o.getMinute().progress * 360) + 'deg) rotateX(' + (o.getMinute().progress * 360) + 'deg)' );
+
+                $all.css('background-color', "hsl(" + (o.getMinute().progress * 360) + ",100%, 50%)");
+                $('.watch').css("background-image", "-moz-linear-gradient(hsl(" + ((o.getMinute().progress * 360) - 180) + ",100%," + (100 - (o.getHour().progress * 80)) + "%),hsl(" + ((o.getMinute().progress * 360)) + ",100%," + (100 - (o.getHour().progress * 80)) + "%))" );
+                $('.watch').css("background-image", "-webkit-linear-gradient(hsl(" + ((o.getMinute().progress * 360) - 180) + ",100%," + (100 - (o.getHour().progress * 80)) + "%),hsl(" + ((o.getMinute().progress * 360)) + ",100%," + (100 - (o.getHour().progress * 80)) + "%))" );
             });
 
-            ticktack.on('second', function(o,e){
-                console.log(o.second.value,o.second.progress);
+            ticktack.on('second', function(o){
+                console.log(o.getSecond().value,o.getSecond().progress);
             });
-            ticktack.on('second', function(e,o){
-                console.log(e,o);
+            ticktack.on('second', function(o){
+                console.log(o);
             });
         </script>
         <script>
