@@ -101,10 +101,14 @@
     }
   ];
 
-
-  function capitalizeFirstLetter(string) {
+  /**
+   * capitalize the fist letter of a string
+   * @param   {string} string
+   * @returns {string}        capitalized string
+   */
+   capitalize = function (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  }
 
   /**
    * getTimeObject: produces an object containing all values and relative values for every digit in Date()
@@ -118,15 +122,15 @@
     timeInMilliseconds = now.getTime() - now.getTimezoneOffset() * 60000;
 
     return (function () {
-      var digits, cache;
+      var digits, cache, getDate;
 
       cache = {};
-      digits = {}
+      digits = {};
 
       units.forEach(function (propertyDefinition) {
         var property, functionName, value;
         property = propertyDefinition.property;
-        functionName = 'get' + capitalizeFirstLetter(property);
+        functionName = 'get' + capitalize(property);
 
         digits[functionName] = function () {
           if (cache[property]) {
