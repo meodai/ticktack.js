@@ -228,11 +228,11 @@
       }
 
       ticktack.on('tick', function(o){
-        setThetaLength(geom_seconds, o.minute.progress * Math.PI * 2 * -1);
-        setThetaLength(geom_minutes, o.hour.progress * Math.PI * 2 * -1);
+        setThetaLength(geom_seconds, o.getMinute().progress * Math.PI * 2 * -1);
+        setThetaLength(geom_minutes, o.getHour().progress * Math.PI * 2 * -1);
 
         // display 2 * 12h, day.progress is calculted on 24h.
-        var day_progress = (o.day.progress * 2) % 1;
+        var day_progress = (o.getDay().progress * 2) % 1;
         setThetaLength(geom_hours, day_progress * Math.PI * 2 * -1);
 
 
@@ -252,7 +252,7 @@
           item.rotation.set(0, 0, rotation);
         }
 
-        last_minute_progress = o.minute.progress;
+        last_minute_progress = o.getMinute().progress;
         render();
       });
 
@@ -269,7 +269,7 @@
         var timer = Date.now() * 0.0001;
 
         // Add some damping to mouse movement.
-          mouse_offset.dx += (mouse_offset.x - mouse_offset.dx) * 0.05;
+        mouse_offset.dx += (mouse_offset.x - mouse_offset.dx) * 0.05;
         mouse_offset.dy += (mouse_offset.y - mouse_offset.dy) * 0.05;
         camera.position.x = Math.cos( timer ) * 50 + mouse_offset.dx * 200;
         camera.position.y = mouse_offset.dy * 200;

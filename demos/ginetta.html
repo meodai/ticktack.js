@@ -132,9 +132,10 @@
             };
 
             ticktack.on('tick', function(o){
+
                 var color, color2, time = new Date();
-                color = timeToColor( o.minute.progress );
-                color2 = timeToColor( o.minute.progress, 18 );
+                color = timeToColor( o.getMinute().progress );
+                color2 = timeToColor( o.getMinute().progress, 18 );
 
                 if(isNight){
                   $body.css("color", color);
@@ -147,7 +148,7 @@
                   });
                 }
 
-                $clock.text( zeroPad(o.hour.value,2) + " " + zeroPad(o.minute.value,2) + " " + zeroPad(o.second.value,2) );
+                $clock.text( zeroPad(o.getHour().value,2) + " " + zeroPad(o.getMinute().value,2) + " " + zeroPad(o.getSecond().value,2) );
                 setNight(time);
                 $color.text( color );
             });

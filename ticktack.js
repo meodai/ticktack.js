@@ -10,7 +10,11 @@
       root.ticktack = factory();
   }
 }(this, function () {
-  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback, initLoop, setTimeObject;
+  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks,
+      timeObject, runCallback, initLoop, setTimeObject, capitalize,
+
+  // constants
+      units;
 
   // Initializing callback objects
   callbacks = {};
@@ -36,103 +40,133 @@
   /**
    * runCallback: execute callback with the correct timeobject arguments
    * @param   {Function} callback   callback function
-   * @param   {[type]}   eventName  name of the event
+   * @param   {string}   eventName  name of the event
    * @returns {void}
    */
   runCallback = function (callback, eventName) {
-    callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
+    callback.call(timeObject, timeObject);
   };
 
   /**
-   * getTimeObject : produces an object containing all values and relative values for every digit in Date()
+   * [units description]
+   * @type {Array}  contains methods and properties used to
+   * create the digits
+   */
+  units = [
+    {
+      property: 'year',
+      progressFunction: function yearProgress(value, now) {
+        var daysInYear, jan1;
+        daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
+        jan1 = new Date(now.getFullYear(), 0, 1);
+        return Math.ceil((now - jan1) / 86400000) / daysInYear;
+      },
+      dateMethod: 'getFullYear'
+    }, {
+      property: 'month',
+      progressFunction: function monthProgress(value, now) {
+        return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
+      },
+      dateMethod: 'getMonth'
+    }, {
+      property: 'day',
+      progressFunction: function dayProgress(value, now) {
+        return now.getHours() / 24;
+      },
+      dateMethod: 'getDay'
+    }, {
+      property: 'hour',
+      progressFunction: function hourProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
+      },
+      dateMethod: 'getHours'
+    }, {
+      property: 'minute',
+      progressFunction: function minuteProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000 / 60) % 60 - value;
+      },
+      dateMethod: 'getMinutes'
+    }, {
+      property: 'second',
+      progressFunction: function secondProgress(value, now, timeInMilliseconds) {
+        return (timeInMilliseconds / 1000) % 60 - value;
+      },
+      dateMethod: 'getSeconds'
+    }, {
+      property: 'millisecond',
+      dateMethod: 'getMilliseconds',
+      progressFunction: function () {
+        return 0;
+      }
+    }
+  ];
+
+  /**
+   * capitalize the fist letter of a string
+   * @param   {string} string
+   * @returns {string}        capitalized string
+   */
+   capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  /**
+   * getTimeObject: produces an object containing all values and relative values for every digit in Date()
    * @param   {Object} previousDigits object previously obtained by getTimeObject to know what values did change
    * @returns {Object}                value and progress for every digit in Date()
    */
   getTimeObject = function (previousDigits) {
-    var now, timeInMilliseconds, digit, digits, d;
+    var now, timeInMilliseconds;
 
     now = new Date();
     timeInMilliseconds = now.getTime() - now.getTimezoneOffset() * 60000;
 
-    digits = {
-      'year': {
-        method: 'getFullYear',
-        value: 0,
-        progress: 0,
-        getProgress: function() {
-            var daysInYear, jan1;
-            daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
-            jan1 = new Date(now.getFullYear(), 0, 1);
-            return Math.ceil((now - jan1) / 86400000) / daysInYear;
-        }
-      },
-      'month': {
-        method: 'getMonth',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
-        }
-      },
-      'day': {
-        method: 'getDay',
-        value: 0,
-        progress: 0,
-        getProgress: function() {
-          return now.getHours() / 24;
-        }
-      },
-      'hour': {
-        method: 'getHours',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
-        }
-      },
-      'minute': {
-        method: 'getMinutes',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000 / 60) % 60 - value;
-        }
-      },
-      'second': {
-        method: 'getSeconds',
-        value: 0,
-        progress: 0,
-        getProgress: function(value) {
-          return (timeInMilliseconds / 1000) % 60 - value;
-        }
-      },
-      'millisecond': {
-        method: 'getMilliseconds',
-        value: 0
-      }
-    };
+    return (function () {
+      var digits, cache, getDate;
 
-    for (digit in digits) {
-      if ( !digits.hasOwnProperty(digit) ) {
-        continue;
-      }
+      cache = {};
+      digits = {};
 
-      d = digits[digit];
-      // sets the value using the appropriate Date method
-      d.value = now[d.method]();
-      if (d.getProgress) {
-        // calculates the relative progress
-        d.progress = d.getProgress(d.value);
-      }
-      // compares with previous digits object to track changes
-      if (previousDigits && previousDigits[digit]) {
-        d.hasChanged = d.value !== previousDigits[digit].value;
-      }
-    }
+      units.forEach(function (propertyDefinition) {
+        var property, functionName, value;
+        property = propertyDefinition.property;
+        functionName = 'get' + capitalize(property);
 
-    return digits;
+        digits[functionName] = function () {
+          if (cache[property]) {
+            return cache[property]
+          }
+
+          value = now[propertyDefinition.dateMethod]();
+
+          return cache[property] = {
+            value: value,
+            progress: propertyDefinition.progressFunction(
+              value,
+              now,
+              timeInMilliseconds
+            )
+          }
+        };
+
+        digits['getDate'] = function () {
+          return now;
+        };
+
+        // will be removed in some future release,
+        // only purpose is to provide legacy support
+        Object.defineProperty(digits, property, {
+            get: function () {
+              // console.log('calling `digit.' + property + '` is depricated, use `digit.' + functionName + '()` instead.');
+              return this[functionName]();
+            }
+        });
+      })
+
+      return digits;
+    })();
+
   };
-
 
   setTimeObject = function() {
     // get new data structure
@@ -145,9 +179,7 @@
    */
   tick = function () {
     window.requestAnimationFrame(tick);
-
     setTimeObject();
-    // runs callbacks
     runCallbacks();
   };
 
