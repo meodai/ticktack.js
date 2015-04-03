@@ -39,7 +39,7 @@ requestanimationframe based watch.
 event type: hour, minute, second, millisecond or tick
 
 **handler**
-*Type*: Function( PlainObject digit, PlainObject digits )
+*Type*: Function( PlainObject digits )
 
 - *digits* object containng getter functions for every digit.
 ```javascript
