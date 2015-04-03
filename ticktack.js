@@ -149,6 +149,12 @@
           }
         };
 
+        digits['getDate'] = function () {
+          return now;
+        };
+
+        // will be removed in some future release,
+        // only purpose is to provide legacy support
         Object.defineProperty(digits, property, {
             get: function () {
               // console.log('calling `digit.' + property + '` is depricated, use `digit.' + functionName + '()` instead.');
