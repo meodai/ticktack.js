@@ -10,9 +10,11 @@
       root.ticktack = factory();
   }
 }(this, function () {
-  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks, timeObject, runCallback, initLoop, setTimeObject,
+  var callbacks, registeredCallbacks, tick, getTimeObject, runCallbacks,
+      timeObject, runCallback, initLoop, setTimeObject, capitalize,
+
   // constants
-      PROGRESS_FUNCTIONS, DIGITS_METHODS, DIGITS;
+      units;
 
   // Initializing callback objects
   callbacks = {};
@@ -45,10 +47,15 @@
     callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
   };
 
-  PROGRESS_FUNCTIONS = [
+  /**
+   * [units description]
+   * @type {Array}  contains methods and properties used to
+   * create the digits
+   */
+  units = [
     {
       property: 'year',
-      getterFunction: function yearProgress(value, now) {
+      progressFunction: function yearProgress(value, now) {
         var daysInYear, jan1;
         daysInYear = now.getFullYear() % 4 === 0 ? 366 : 365;
         jan1 = new Date(now.getFullYear(), 0, 1);
@@ -57,38 +64,38 @@
       dateMethod: 'getFullYear'
     }, {
       property: 'month',
-      getterFunction: function monthProgress(value, now) {
+      progressFunction: function monthProgress(value, now) {
         return now.getDate() / new Date(now.getFullYear(), value, 0).getDate();
       },
       dateMethod: 'getMonth'
     }, {
       property: 'day',
-      getterFunction: function dayProgress(value, now) {
+      progressFunction: function dayProgress(value, now) {
         return now.getHours() / 24;
       },
       dateMethod: 'getDay'
     }, {
       property: 'hour',
-      getterFunction: function hourProgress(value, now, timeInMilliseconds) {
+      progressFunction: function hourProgress(value, now, timeInMilliseconds) {
         return (timeInMilliseconds / 1000 / 60 / 60) % 24 - value;
       },
       dateMethod: 'getHours'
     }, {
       property: 'minute',
-      getterFunction: function minuteProgress(value, now, timeInMilliseconds) {
+      progressFunction: function minuteProgress(value, now, timeInMilliseconds) {
         return (timeInMilliseconds / 1000 / 60) % 60 - value;
       },
       dateMethod: 'getMinutes'
     }, {
       property: 'second',
-      getterFunction: function secondProgress(value, now, timeInMilliseconds) {
+      progressFunction: function secondProgress(value, now, timeInMilliseconds) {
         return (timeInMilliseconds / 1000) % 60 - value;
       },
       dateMethod: 'getSeconds'
     }, {
       property: 'millisecond',
       dateMethod: 'getMilliseconds',
-      getterFunction: function () {
+      progressFunction: function () {
         return 0;
       }
     }
@@ -100,7 +107,7 @@
 }
 
   /**
-   * getTimeObject : produces an object containing all values and relative values for every digit in Date()
+   * getTimeObject: produces an object containing all values and relative values for every digit in Date()
    * @param   {Object} previousDigits object previously obtained by getTimeObject to know what values did change
    * @returns {Object}                value and progress for every digit in Date()
    */
@@ -116,7 +123,7 @@
       cache = {};
       digits = {}
 
-      PROGRESS_FUNCTIONS.forEach(function (propertyDefinition) {
+      units.forEach(function (propertyDefinition) {
         var property, functionName, value;
         property = propertyDefinition.property;
         functionName = 'get' + capitalizeFirstLetter(property);
@@ -130,7 +137,7 @@
 
           return cache[property] = {
             value: value,
-            progress: propertyDefinition.getterFunction(
+            progress: propertyDefinition.progressFunction(
               value,
               now,
               timeInMilliseconds
@@ -145,6 +152,7 @@
             }
         });
       })
+
       return digits;
     })();
 
