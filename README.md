@@ -18,13 +18,12 @@ requestanimationframe based watch.
 ### Usage
 
 ```javascript
-  ticktack.on('second', function(digit,digits){
-    console.log(digit,digits);
-    // digit and 'this' contain all the values relative to seconds
-    // digits contains values for all digits
+  ticktack.on('second', function(digits){
+    console.log(digits.getSecond().progress);
+    // digits and 'this' contain all the getter functions
   });
 
-  ticktack.on('tick', function(e,o){
+  ticktack.on('tick', function(digits){
     // will be called on requestAnimationFrame
   });
 
@@ -38,45 +37,16 @@ event type: hour, minute, second, millisecond or tick
 
 **handler**
 *Type*: Function( PlainObject digit, PlainObject digits )
-- *digit*: contains an object with values relative to the event typically
-```javascript
-{
-	method: "getSeconds",
-    // string containing the original Date method
-    progress: 0,
-    // float between 0 - 1 containing the progress to the next digit
-    value: 0
-    // int containing the value of the digit
-}
-```
 
-- *digits* object containng all digit objects.
-```javascriot
+- *digits* object containng getter functions for every digit.
+```javascript
   {
-    'day': {
-      method: 'getDay',
-      value: 0,
-      progress: 0
-    },
-    'hour': {
-      method: 'getHours',
-      value: 0,
-      progress: 0
-    },
-    'minute': {
-      method: 'getMinutes',
-      value: 0,
-      progress: 0
-    },
-    'second': {
-      method: 'getSeconds',
-      value: 0,
-      progress: 0
-    },
-    'millisecond': {
-      method: 'getMilliseconds',
-      value: 0
-    }
+    'getDay': function(){ ... }, // {value: 0, progress: 0}
+    'getHour': function(){ ... }, // {value: 0, progress: 0}
+    'getMinute': function(){ ... }, // {value: 0, progress: 0}
+    'getSecond': function(){ ... }, // {value: 0, progress: 0}
+    'getMillisecond': function(){ ... }, // {value: 0, progress: 0}
+    'getDate': function(){ ... }  // js Date
   }
 ```
 
