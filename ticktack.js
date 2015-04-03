@@ -44,7 +44,7 @@
    * @returns {void}
    */
   runCallback = function (callback, eventName) {
-    callback.call(timeObject[eventName], timeObject, timeObject[eventName]);
+    callback.call(timeObject, timeObject);
   };
 
   /**
