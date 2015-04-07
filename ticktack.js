@@ -20,6 +20,16 @@
   callbacks = {};
   registeredCallbacks = [];
 
+
+  /**
+   * capitalize the fist letter of a string
+   * @param   {string} string
+   * @returns {string}        capitalized string
+   */
+  capitalize = function (string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   /**
    * runCallbacks : loops callbacks and calls them
    * @param   {Object} obj object produced by getTimeObject, will be passed to the callback
@@ -102,24 +112,15 @@
   ];
 
   /**
-   * capitalize the fist letter of a string
-   * @param   {string} string
-   * @returns {string}        capitalized string
-   */
-   capitalize = function (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  /**
    * getTimeObject: produces an object containing all values and relative values for every digit in Date()
    * @param   {Object} previousDigits object previously obtained by getTimeObject to know what values did change
    * @returns {Object}                value and progress for every digit in Date()
    */
   getTimeObject = function (previousDigits) {
     var now, timeInMilliseconds;
-
     now = new Date();
     timeInMilliseconds = now.getTime() - now.getTimezoneOffset() * 60000;
+    previousDigits = previousDigits || {};
 
     return (function () {
       var digits, cache, getDate;
@@ -128,7 +129,7 @@
       digits = {};
 
       units.forEach(function (propertyDefinition) {
-        var property, functionName, value;
+        var property, functionName, value, hasChanged;
         property = propertyDefinition.property;
         functionName = 'get' + capitalize(property);
 
@@ -139,13 +140,16 @@
 
           value = now[propertyDefinition.dateMethod]();
 
+          hasChanged = !previousDigits[property] || previousDigits[property].value !== value;
+
           return cache[property] = {
             value: value,
             progress: propertyDefinition.progressFunction(
               value,
               now,
               timeInMilliseconds
-            )
+            ),
+            hasChanged: hasChanged
           }
         };
 
