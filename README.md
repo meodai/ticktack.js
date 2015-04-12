@@ -12,6 +12,7 @@ requestanimationframe based watch.
 - [flat abstract 3d planets] (http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
 - [swiss train station aka ios] (http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
 - [hyphae] (http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
+- [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
 
 ## Installation
 
