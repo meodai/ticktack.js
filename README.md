@@ -13,6 +13,7 @@ requestanimationframe based watch.
 - [swiss train station aka ios] (http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
 - [hyphae] (http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
 - [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
+- [flipping diamond] (http://codepen.io/daviddarx/pen/azeOjK?editors=001) by @daviddarx
 
 ## Installation
 
