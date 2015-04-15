@@ -14,6 +14,7 @@ requestanimationframe based watch.
 - [hyphae] (http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
 - [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
 - [flipping diamond] (http://codepen.io/daviddarx/pen/azeOjK?editors=001) by @daviddarx
+- [abstract clock] (http://codepen.io/castrolol/pen/GgVXNM?editors=001) by @castrolol
 
 ## Installation
 
