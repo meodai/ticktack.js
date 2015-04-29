@@ -8,12 +8,12 @@ requestanimationframe based watch.
 - [3D Progress with Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
 - [husl color gradient] (http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
 - [hipster demo] (http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
-- [randomized Lines] (http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
+- [Randomized Lines] (http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
 - [flat abstract 3d planets] (http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
 - [swiss train station aka ios] (http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
 - [hyphae] (http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
 - [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
-- [flipping diamond] (http://codepen.io/daviddarx/pen/EaqjpL?editors=001) by @daviddarx
+- [Flipping Diamond] (http://codepen.io/daviddarx/pen/EaqjpL?editors=001) by @daviddarx
 - [abstract clock] (http://codepen.io/castrolol/pen/GgVXNM?editors=001) by @castrolol
 
 ## Installation
