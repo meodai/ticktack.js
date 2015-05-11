@@ -5,6 +5,7 @@ requestanimationframe based watch.
 
 ## Demos
 
+- [Unstable clock with Three.js] http://freelance-html-developer.com/clock/ by @slatom
 - [3D Progress with Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
 - [husl color gradient] (http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
 - [hipster demo] (http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
