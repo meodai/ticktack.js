@@ -1,0 +1,26 @@
+{
+  "name": "ticktack.js",
+  "version": "0.5.2",
+  "description": "requestanimationframe based watch",
+  "main": "ticktack.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meodai/ticktack.js.git"
+  },
+  "keywords": [
+    "animation",
+    "client",
+    "raf",
+    "requestanimation",
+    "frame"
+  ],
+  "author": "meodai <meodai@gmail.com> (https://github.com/meodai/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meodai/ticktack.js/issues"
+  },
+  "homepage": "https://github.com/meodai/ticktack.js#readme"
+}
