@@ -27,6 +27,8 @@ requestanimationframe based watch.
   npm install ticktack.js --save
 ```
 
+**or**
+
 ```
   bower install ticktack.js
 ```
