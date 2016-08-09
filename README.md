@@ -5,7 +5,7 @@ requestanimationframe based watch.
 
 ## Demos
 
-- [Flashy hair] (http://codepen.io/meodai/pen/gpqoOW?editors=001) by @meodai
+- [Triangulate] (http://codepen.io/meodai/pen/GqwWRR?editors=0010) by [@backoefer](http://codepen.io/backoefer/)
 - [Unstable clock with Three.js] (http://freelance-html-developer.com/clock/) by @slatom
 - [3D Progress with Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
 - [husl color gradient] (http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
@@ -17,6 +17,7 @@ requestanimationframe based watch.
 - [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
 - [Flipping Diamond] (http://codepen.io/daviddarx/pen/EaqjpL?editors=001) by @daviddarx
 - [abstract clock] (http://codepen.io/castrolol/pen/GgVXNM?editors=001) by @castrolol
+- [Flashy hair] (http://codepen.io/meodai/pen/gpqoOW?editors=001) by @meodai
 
 ## Used on
 - [tramclockmunich] (http://tramclockmunich.com) 
