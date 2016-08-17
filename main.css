@@ -78,6 +78,7 @@ body {
   color:          var(--c-dark);
   background:     var(--c-light);
 }
+
 h1 {
   font-size: 2.5rem;
 }
@@ -125,19 +126,20 @@ a:hover {
 
 .button {
   display: inline-block;
-  color: var(--c-dark);
+  color: var(--c-light);
   text-decoration: none;
   padding: 0.75rem 1rem;
-  background: var(--c-bright);
+  background: var(--c-dark);
   font-size: .9rem;
   margin: 0 0.25rem 0.25rem 0;
-}
+  border: 1px solid var(--c-light);
 
+}
 .button:hover {
-  color: var(--c-light);
-  background: var(--c-dark);
-
+  color: var(--c-dark);
+  background: var(--c-bright);
 }
+
 
 .codeblock {
   margin: 2rem 0;

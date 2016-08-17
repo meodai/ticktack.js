@@ -2,7 +2,6 @@ const d     = document;
 const sec   = d.querySelector('.js-sec');
 const min   = d.querySelector('.js-min');
 const hour  = d.querySelector('.js-hour');
-const titleProgress = d.querySelector('.js-progress--second');
 
 function rotate(el, rotation) {
   //el.setAttribute('transform', 'rotate('+ rotation +' 500 500)');
