@@ -36,14 +36,17 @@
       </article>
       <div class="codeblock">
         <pre class="contain">
-          <code class="javascript">
-// Grabs a random DOM element
-const titleProgress = document.querySelector('.js-progress--second');
+          <code class="javascript">// Grab a random DOM element
+const sec = document.querySelector('.js-sec');
+const hour = document.querySelector('.js-hour');
 
 // Adds a callback on every tick (requestAnimationFrame)
 ticktack.on('tick', digits => {
   // Digits contains everything you will need to animate a clock
-  titleProgress.style.transform = `scaleX(${digits.getMinute().progress})`;
+  sec.style.transform = `rotate(${digits.getMinute().progress * 360} +' 500 500)`;
+})
+ticktack.on('minute', digits => {
+  hour.style.transform = `rotate(${digits.getHour().progress * 360} +' 500 500)`;
 });</code>
         </pre>
       </div>
@@ -132,7 +135,7 @@ ticktack.on('second', d => {
       </article>
       <article>
         <div class="contain">
-          <h2 id="api">Demo</h2>
+          <h2 id="demos">Demo's</h2>
 
         </div>
       </article>

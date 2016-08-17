@@ -179,7 +179,7 @@ code {
 .hand {
   stroke:         var(--c-dark);
   stroke-linecap: square;
-  stroke-width:   15;
+  stroke-width:   20;
   fill:           none;
 }
 

@@ -16,7 +16,7 @@ ticktack.on('tick', digits => {
 });
 ticktack.on('minute', digits => {
   rotate(min, digits.getHour().progress * 360);
-});
+})
 ticktack.on('hour', digits => {
-  rotate(hour, digits.getDay().progress * 360);
+  rotate(hour, digits.getDay().progress * 720);
 });
