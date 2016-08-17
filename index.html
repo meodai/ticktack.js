@@ -34,7 +34,7 @@
         <a href="//raw.githubusercontent.com/meodai/ticktack.js/master/ticktack.js" class="button icon-download-cloud">Download</a>
         <a href="https://www.npmjs.com/package/ticktack.js" class="button icon-puzzle-outline">npm/ticktack.js</a>
       </article>
-      <div class="codeblock">
+      <div class="codeblock content">
         <pre class="contain">
           <code class="javascript">// Grab a random DOM element
 const sec = document.querySelector('.js-sec');
@@ -50,7 +50,7 @@ ticktack.on('minute', digits => {
 });</code>
         </pre>
       </div>
-      <article>
+      <article class="content">
         <div class="contain">
           <h2 id="installation">Installation</h2>
           <p>To get ticktack.js, either download the latest release and include it in your html <code>window.ticktack</code>, or get it with NPM.</p>
@@ -62,7 +62,7 @@ ticktack.on('minute', digits => {
           </pre>
         </div>
       </article>
-      <article>
+      <article class="content">
         <div class="contain">
           <h2 id="usage">Usage</h2>
           <p>ticktack has a single method on that takes two arguments; <code>eventName</code> as a string and <code>callback</code> as a function. The possible event event names you can register a callback on are: <code>tick</code>, <code>millisecond</code>, <code>second</code>, <code>minute</code>, <code>hour</code>, <code>day</code>, <code>month</code>, <code>year</code></p>
@@ -82,7 +82,7 @@ ticktack.on('tick', digits => {
   </pre>
         </div>
       </article>
-      <article>
+      <article class="content">
         <div class="contain">
           <h2 class="is-hidden" id="basics">Callback function</h2>
           <p>Within each callback function you have access to the current value or progress for each Date attribute.</p>
@@ -108,7 +108,7 @@ ticktack.on('second', d => {
   </pre>
         </div>
       </article>
-      <article>
+      <article class="content">
         <div class="contain">
           <h2 id="api">API</h2>
           <p>Everything you have to know is that you can register as many events as you want, for every date attribute, with the <code>.on()</code> method.</p>
@@ -133,7 +133,7 @@ ticktack.on('second', d => {
   </pre>
         </div>
       </article>
-      <article>
+      <article class="content">
         <div class="contain">
           <h2 id="demo">Demo's</h2>
           <ul>

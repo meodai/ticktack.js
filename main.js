@@ -20,3 +20,7 @@ ticktack.on('minute', digits => {
 ticktack.on('hour', digits => {
   rotate(hour, digits.getDay().progress * 720);
 });
+
+setTimeout(() => {
+  d.body.classList.add('show');
+}, 2000);
