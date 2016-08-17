@@ -103,6 +103,12 @@ a:hover {
   margin: 0;
   padding: 0 0 1rem 50%;
 }
+.title i {
+  color: var(--c-light);
+  font-size: 1.5em;
+  font-style: normal;
+  margin: 0 -0.175em 0 -0.075em;
+}
 .title__progress {
   position: absolute;
   bottom: 1rem; left: 0; right: 0; top: 0;
