@@ -1,1 +1,149 @@
-<html><head></head><body><h1>Ticktack.js</h1></body></html>
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+      <header class="contain">
+        <h1 class="title">
+          <span class='title__progress js-progress--second'></span>
+          <span class='title__text'>TickTack.js</span>
+        </h1>
+        <p class="lead">A microscopic (~0.8Kb) JavaScriprt helper that translates time into a progress. Awesome to animate and to build clocks.</p>
+          <!--svg class="clock__svg" height="200" width="200" viewBox="0 0 1000 1000">
+            <g class="clock">
+              <path d="M500,500,500,236" class="js-hour hand hand--hour"/>
+              <path d="M500,500,500,120" class="js-min hand hand--min" />
+              <path d="M500,500,500,90" class="js-sec hand hand--sec" />
+            </g>
+          </svg-->
+      </header>
+      <article class="links contain">
+        <a href="#demo" class="button icon-clock">Demo</a>
+        <a href="//github.com/meodai/ticktack.js" class="button icon-github">Source</a>
+        <a href="#" class="button icon-download-cloud">Download</a>
+        <a href="https://www.npmjs.com/package/ticktack.js" class="button icon-puzzle-outline">npm/ticktack.js</a>
+      </article>
+      <div class="codeblock">
+        <pre class="contain">
+          <code class="javascript">
+// Grabs a random DOM element
+const titleProgress = document.querySelector('.js-progress--second');
+
+// Adds a callback on every tick (requestAnimationFrame)
+ticktack.on('tick', digits => {
+  // Digits contains everything you will need to animate a clock
+  titleProgress.style.transform = `scaleX(${digits.getMinute().progress})`;
+});</code>
+        </pre>
+      </div>
+      <article>
+        <div class="contain">
+          <h2 id="installation">Installation</h2>
+          <p>To get ticktack.js, either download the latest release and include it in your html <code>window.ticktack</code>, or get it with NPM.</p>
+        </div>
+        <div class="codeblock">
+          <pre class="contain">
+            <code class="shell">
+  $ npm install ticktack.js --save</code>
+          </pre>
+        </div>
+      </article>
+      <article>
+        <div class="contain">
+          <h2 id="usage">Usage</h2>
+          <p>ticktack has a single method on that takes two arguments; <code>eventName</code> as a string and <code>callback</code> as a function. The possible event event names you can register a callback on are: <code>tick</code>, <code>millisecond</code>, <code>second</code>, <code>minute</code>, <code>hour</code>, <code>day</code>, <code>month</code>, <code>year</code></p>
+        </div>
+        <div class="codeblock">
+          <pre class="contain">
+            <code class="javascript">// event called on every second
+ticktack.on('second', digits => {
+  // digits and 'this' contain all the getter functions
+  console.log(digits.getSecond().progress);
+});
+
+// event called on every request animation frame
+ticktack.on('tick', digits => {
+  // will be called on requestAnimationFrame
+});</code>
+  </pre>
+        </div>
+      </article>
+      <article>
+        <div class="contain">
+          <h2 class="is-hidden" id="basics">Callback function</h2>
+          <p>Within each callback function you have access to the current value or progress for each Date attribute.</p>
+        </div>
+        <div class="codeblock">
+          <pre class="contain">
+            <code class="javascript">// lets say this event is called at 6:30:10:100 AM
+ticktack.on('second', d => {
+  d.getMilliseconds().progress; // => 0.1
+  d.getMilliseconds().value;    // => 100
+
+  d.getSecond().progress;       // => 0.16666666667
+  d.getSecond().value;          // => 10
+
+  d.getMinute().progress;       // => 30
+  d.getMinute().value;          // => 0.2
+
+  d.getHour().progress;         // => 0.5
+  d.getHour().value;            // => 6
+
+  d.getDay().progress;          // => 0.2
+});</code>
+  </pre>
+        </div>
+      </article>
+      <article>
+        <div class="contain">
+          <h2 id="api">API</h2>
+          <p>Everything you have to know is that you can register as many events as you want, for every date attribute, with the <code>.on()</code> method.</p>
+          <p>
+            <h3><code>ticktack.on(event, handler)</code></h3>
+            <code>event</code>
+            Type: String event type: hour, minute, second, millisecond or tick<br /><br />
+            <code>handler</code> Type: Function( PlainObject digits ) digits object containng getter functions for every digit.</p>
+          <p>The function called by the on <code>.on()</code> method. Has all the functions you need bound to <code>this</code> and the first <code>argument</code></p>
+
+        </div>
+        <div class="codeblock">
+          <pre class="contain">
+            <code class="javascript">{
+  'getDay': function(){ ... }, // {value: 0, progress: 0}
+  'getHour': function(){ ... }, // {value: 0, progress: 0}
+  'getMinute': function(){ ... }, // {value: 0, progress: 0}
+  'getSecond': function(){ ... }, // {value: 0, progress: 0}
+  'getMillisecond': function(){ ... }, // {value: 0, progress: 0}
+  'getDate': function(){ ... }  // js Date
+}</code>
+  </pre>
+        </div>
+      </article>
+      <article>
+        <div class="contain">
+          <h2 id="api">Demo</h2>
+
+        </div>
+      </article>
+
+      <script src="https://rawgit.com/meodai/ticktack.js/master/ticktack.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+      <script src="main.js"></script>
+      <script>
+          window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+          ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+      </script>
+      <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    </body>
+</html>
