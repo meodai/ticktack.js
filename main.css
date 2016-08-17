@@ -72,6 +72,7 @@
 
 body {
   padding-top:    12rem;
+  padding-bottom: 6rem;
   font-family:    var(--t-font);
   font-size:      calc(0.7rem + .5vw);
   color:          var(--c-dark);
@@ -83,6 +84,12 @@ h1 {
 h2 {
   font-size: 1.75rem;
   margin-top: 6rem;
+}
+a {
+  color: var(--c-dark);
+}
+a:hover {
+  text-decoration: none;
 }
 .contain {
   margin: 0 auto;
@@ -178,7 +185,7 @@ code {
 
 .hand {
   stroke:         var(--c-dark);
-  stroke-linecap: square;
+  stroke-linecap: round;
   stroke-width:   20;
   fill:           none;
 }
