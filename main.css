@@ -1,6 +1,6 @@
 :root {
   --c-dark:   #16161d; /* eigengrau */
-  --c-light:  hsl(136,100%,77%); /* #8fd mint */
+  --c-light:  #fff; /* hsl(136,100%,77%); #8fd mint */
   --c-bright: #fff;
   --t-font: 'Inconsolata', ipm, Menlo, 'Courier New', monospace;
 }
@@ -78,7 +78,7 @@ body {
   background:     var(--c-light);
 }
 h1 {
-  font-size: 4rem;
+  font-size: 2.5rem;
 }
 h2 {
   font-size: 1.75rem;
@@ -92,10 +92,8 @@ h2 {
 }
 .title {
   position: relative;
-  margin: 0 -1rem 1rem;
-  padding: 0 1rem 1rem;
-  border-bottom: 1px solid var(--c-dark);
-
+  margin: 0;
+  padding: 0 0 1rem 50%;
 }
 .title__progress {
   position: absolute;
@@ -108,9 +106,14 @@ h2 {
   position: relative;
   z-index: 2;
 }
+.lead {
+  margin: 0 0 0 calc(50% + 0.35rem);
+}
 
 .links {
-  margin-top: 5rem;
+  position: relative;
+  z-index: 2;
+  margin-top: 10rem;
 }
 
 .button {
@@ -129,11 +132,9 @@ h2 {
 
 }
 
-
 .codeblock {
   margin: 2rem 0;
 }
-
 .codeblock,
 .codeblock pre,
 .codeblock pre code {
@@ -161,18 +162,28 @@ code {
   display: none;
 }
 
-/* clock
-.clock__svg {
-  position:       absolute;
-  top:            0;
-  right:          0;
-  width:          40vw;
-  height:         40vw;
+.title__clock,
+.clock__bg {
+  position: absolute;
+  width: 48rem; height: 48rem;
+  left: 50%; bottom: 50%;
+  transform: translate(-50%,43%);
 }
+
+.clock__bg {
+  z-index: -1;
+  background: var(--c-bright);
+  border-radius: 50%;
+}
+
 .hand {
   stroke:         var(--c-dark);
   stroke-linecap: square;
   stroke-width:   15;
   fill:           none;
 }
-*/
+
+.hand--sec {
+  stroke-width: 10;
+  stroke: var(--c-light);
+}
