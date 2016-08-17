@@ -188,7 +188,7 @@ code {
   stroke-linecap: round;
   stroke-width:   20;
   fill:           none;
-  transform-origin: 50% 100%;
+  transform-origin: 500px 500px;
 }
 
 .hand--min,
