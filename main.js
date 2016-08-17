@@ -5,7 +5,8 @@ const hour  = d.querySelector('.js-hour');
 const titleProgress = d.querySelector('.js-progress--second');
 
 function rotate(el, rotation) {
-  el.setAttribute('transform', 'rotate('+ rotation +' 500 500)');
+  //el.setAttribute('transform', 'rotate('+ rotation +' 500 500)');
+  el.style.transform = `rotate(${rotation}deg)`;
 }
 
 hljs.initHighlightingOnLoad();

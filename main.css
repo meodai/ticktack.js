@@ -188,6 +188,12 @@ code {
   stroke-linecap: round;
   stroke-width:   20;
   fill:           none;
+  transform-origin: 50% 100%;
+}
+
+.hand--min,
+.hand--hour {
+  transition: transform 333ms cubic-bezier(.4,2.08,.55,.44);
 }
 
 .hand--sec {
