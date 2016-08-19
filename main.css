@@ -70,13 +70,15 @@
 .icon-clock:before { content: '\e802'; } /* '' */
 .icon-github:before { content: '\f055'; } /* '' */
 
+html, body {
+  color:          var(--c-dark);
+  background:     var(--c-light);
+}
 body {
   padding-top:    12rem;
   padding-bottom: 6rem;
   font-family:    var(--t-font);
   font-size:      calc(0.7rem + .5vw);
-  color:          var(--c-dark);
-  background:     var(--c-light);
   line-height:    1.4;
 }
 
