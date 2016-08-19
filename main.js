@@ -24,3 +24,19 @@ ticktack.on('hour', function(digits) {
 setTimeout(function() {
   d.body.classList.add('show');
 }, 2000);
+
+function noAnimation () {
+  if ( window.scrollY > 500 ) {
+    d.body.classList.remove('anim')
+  }
+}
+noAnimation();
+
+var timer;
+
+window.addEventListener('scroll', function(){
+  clearTimeout(timer);
+  timer = setTimeout(function(){
+    noAnimation();
+  },16);
+});
