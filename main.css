@@ -100,6 +100,7 @@ a:hover {
 }
 
 .title {
+  z-index: 2;
   position: relative;
   margin: 0;
   padding: 0 0 1rem 50%;
@@ -110,17 +111,10 @@ a:hover {
   font-style: normal;
   margin: 0 -0.175em 0 -0.075em;
 }
-.title__progress {
-  position: absolute;
-  bottom: 1rem; left: 0; right: 0; top: 0;
-  background: var(--c-bright);
-  transform-origin: 0 0 0;
-  will-change: transform;
-}
 .title__text {
   display: block;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   opacity: 0;
   transform: translate(0,4rem);
@@ -135,7 +129,9 @@ a:hover {
 }
 
 .lead {
-  margin: 0 0 0 calc(50% + 0.35rem);
+  position: relative;
+  z-index: 2;
+  margin: 0 0 20rem calc(50% + 0.35rem);
 
   opacity: 0;
   transform: translate(0,4rem);
@@ -150,10 +146,11 @@ a:hover {
 }
 
 .links {
-  position: relative;
-  z-index: 2;
-  margin-top: 10rem;
-
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--c-dark);
+  z-index: 10;
+  padding: 0.75rem 0;
   opacity: 0;
   transform: translate(0,4rem);
   transition: opacity 2.5s cubic-bezier(.12,1.03,.34,1),
@@ -170,16 +167,15 @@ a:hover {
   display: inline-block;
   color: var(--c-light);
   text-decoration: none;
-  padding: 0.75rem 1rem;
   background: var(--c-dark);
   font-size: .9rem;
-  margin: 0 0.25rem 0.25rem 0;
-  border: 1px solid var(--c-light);
-
+  margin: 0 0.5rem 0 0;
+}
+.twitter {
+  float: right;
 }
 .button:hover {
-  color: var(--c-dark);
-  background: var(--c-bright);
+  color: var(--c-bright);
 }
 
 .content {
@@ -216,11 +212,9 @@ code {
   background: var(--c-light);
 }
 
-
 .is-hidden {
   display: none;
 }
-
 .title__clock,
 .clock__bg {
   position: absolute;

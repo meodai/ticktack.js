@@ -28,11 +28,15 @@
         </h1>
         <p class="lead">A microscopic (~0.8Kb) JavaScript helper that translates time into progress. Awesome to animate and to build clocks.</p>
       </header>
-      <article class="links contain">
-        <a href="#demo" class="button icon-clock">Demo</a>
-        <a href="//github.com/meodai/ticktack.js" class="button icon-github">Source</a>
-        <a href="//raw.githubusercontent.com/meodai/ticktack.js/master/ticktack.js" class="button icon-download-cloud">Download</a>
-        <a href="https://www.npmjs.com/package/ticktack.js" class="button icon-puzzle-outline">npm/ticktack.js</a>
+      <article class="links">
+        <nav class="contain">
+          <h2 class="is-hidden">Project Links</h2>
+          <a href="#demo" class="button icon-clock">Demo</a>
+          <a href="//github.com/meodai/ticktack.js" class="button icon-github">Source</a>
+          <a href="//raw.githubusercontent.com/meodai/ticktack.js/master/ticktack.js" class="button icon-download-cloud">Download</a>
+          <a href="https://www.npmjs.com/package/ticktack.js" class="button icon-puzzle-outline">npm/ticktack.js</a>
+          <a href="https://twitter.com/meodai" class="button twitter">@meodai</a>
+        </nav>
       </article>
       <div class="codeblock content">
         <pre class="contain">
@@ -43,10 +47,10 @@ const hour = document.querySelector('.js-hour');
 // Adds a callback on every tick (requestAnimationFrame)
 ticktack.on('tick', digits => {
   // Digits contains everything you will need to animate a clock
-  sec.style.transform = `rotate(${digits.getMinute().progress * 360} +' 500 500)`;
+  sec.style.transform = `rotate(${digits.getMinute().progress * 360})`;
 })
 ticktack.on('minute', digits => {
-  hour.style.transform = `rotate(${digits.getHour().progress * 360} +' 500 500)`;
+  hour.style.transform = `rotate(${digits.getHour().progress * 360})`;
 });</code>
         </pre>
       </div>
@@ -159,7 +163,7 @@ ticktack.on('second', d => {
       <script src="main.js"></script>
       <script>
           window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-          ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+          ga('create','A-82838498-1','auto');ga('send','pageview')
       </script>
       <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     </body>
