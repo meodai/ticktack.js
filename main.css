@@ -287,8 +287,12 @@ code {
 
     transform: translate(-50%,-30%);
   }
-  .show .title__clock,
-  .show .clock__bg {
+  .anim .title__clock,
+  .anim .clock__bg {
+    transform: translate(-50%,-30%);
+  }
+  .anim.show .title__clock,
+  .anim.show .clock__bg {
     transform: translate(-50%,-30%);
   }
 }
