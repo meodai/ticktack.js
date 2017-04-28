@@ -5,22 +5,22 @@ requestanimationframe based watch.
 
 ## Demos
 
-- [Triangulate] (http://codepen.io/meodai/pen/GqwWRR?editors=0010) by [@backoefer](http://codepen.io/backoefer/)
-- [Unstable clock with Three.js] (http://freelance-html-developer.com/clock/) by @slatom
-- [3D Progress with Three.js] (http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
-- [husl color gradient] (http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
-- [hipster demo] (http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
-- [Randomized Lines] (http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
-- [flat abstract 3d planets] (http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
-- [swiss train station aka ios] (http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
-- [hyphae] (http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
-- [coogytack] (http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
-- [Flipping Diamond] (http://codepen.io/daviddarx/pen/EaqjpL?editors=001) by @daviddarx
-- [abstract clock] (http://codepen.io/castrolol/pen/GgVXNM?editors=001) by @castrolol
-- [Flashy hair] (http://codepen.io/meodai/pen/gpqoOW?editors=001) by @meodai
+- [Triangulate](http://codepen.io/meodai/pen/GqwWRR?editors=0010) by [@backoefer](http://codepen.io/backoefer/)
+- [Unstable clock with Three.js](http://freelance-html-developer.com/clock/) by @slatom
+- [3D Progress with Three.js](http://codepen.io/idflood/pen/vERBKG?editors=001) by @idflood
+- [husl color gradient](http://codepen.io/meodai/pen/yyNWKz?editors=001) by @meodai
+- [hipster demo](http://codepen.io/meodai/pen/azqPbq?editors=001) by @daviddarx & @meodai
+- [Randomized Lines](http://codepen.io/daviddarx/pen/vEQKdo?editors=001) by @daviddarx
+- [flat abstract 3d planets](http://codepen.io/meodai/pen/dPQGPy?editors=001) by @meodai
+- [swiss train station aka ios](http://codepen.io/donovanh/pen/myvLpy?editors=001) by @cssanimation
+- [hyphae](http://codepen.io/inconvergent/pen/zxXXwz?editors=001) by @inconvergent
+- [coogytack](http://codepen.io/aeyko/pen/dPENoG?editors=001) by @aeyko
+- [Flipping Diamond](http://codepen.io/daviddarx/pen/EaqjpL?editors=001) by @daviddarx
+- [abstract clock](http://codepen.io/castrolol/pen/GgVXNM?editors=001) by @castrolol
+- [Flashy hair](http://codepen.io/meodai/pen/gpqoOW?editors=001) by @meodai
 
 ## Used on
-- [tramclockmunich] (http://tramclockmunich.com) 
+- [tramclockmunich](http://tramclockmunich.com) 
 
 ## Installation
 
