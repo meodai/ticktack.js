@@ -72,7 +72,7 @@ event type: hour, minute, second, millisecond or tick
 ### Contributors
 - [David Aerne](https://github.com/meodai/)
 - [David Darx](http://www.daviddarx.com/)
-- [David Mignot] (https://github.com/idflood)
+- [David Mignot](https://github.com/idflood)
 - [Pierre Spring](https://github.com/caillou)
 
 
